@@ -1,10 +1,17 @@
 Installation:
 1. Clone repository
-2. Create and activate virtual environment
+     git clone https://github.com/c0n0I/CMPE131ProjectMilestone1.git
+     cd "CMPE131 Project Milestone1"
+3. Create and activate virtual environment
+     .venv\Scripts\Activate.ps1
+4. Instal dependencies
+     pip install -r requirements.txt
 
 Run the App:
-1. Start the server (python run.py)
-2. Open in browser
+1. Start the server
+     python run.py
+3. Open in browser
+     http://127.0.0.1:5000/
 
 Screenshots:
 Index Page
