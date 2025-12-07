@@ -95,3 +95,18 @@ def add_folder():
         return redirect(url_for("main.folders"))
 
     return render_template("main/add_folder.html", form=form)
+
+@main_bp.route("/folders/delete/<int:folder_id>", methods=["POST"])
+@login_required
+def delete_folder(folder_id):
+    folder = Folder.query.get_or_404(folder_id)
+
+    if folder.user_id != current_user.id:
+        flash("You cannot delete another user's folder.", "danger")
+        return redirect(url_for('main.folders'))
+
+    db.session.delete(folder)
+    db.session.commit()
+
+    flash("Folder deleted successfully!", "success")
+    return redirect(url_for('main.folders'))
