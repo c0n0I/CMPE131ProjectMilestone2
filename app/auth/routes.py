@@ -19,3 +19,11 @@ def login():
             flash("Username not found.", "error")
 
     return render_template("auth/login.html", form=form)
+
+from flask_login import login_required, logout_user
+
+@auth_bp.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("auth.login"))
