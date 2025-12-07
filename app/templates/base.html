@@ -7,15 +7,18 @@
 <body>
 
 <nav>
-    <a href="{{ url_for('main.index') }}">Home</a> |
-    <a href="{{ url_for('main.feature') }}">Feature</a> |
-    <a href="{{ url_for('auth.login') }}">Login</a>
-    {% if current_user.is_authenticated %}
+    <a href="{{ url_for('main.index') }}">Home</a>
     <a href="{{ url_for('main.bookmarks') }}">Bookmarks</a>
+
+    {% if current_user.is_authenticated %}
+        <a href="{{ url_for('auth.logout') }}" style="color:red;">Logout</a>
+    {% else %}
+        <a href="{{ url_for('auth.login') }}">Login</a>
     {% endif %}
 </nav>
 
 <hr>
+
 
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
