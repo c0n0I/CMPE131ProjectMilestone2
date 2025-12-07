@@ -5,6 +5,9 @@ from . import main_bp
 from app.forms import BookmarkForm, FolderForm
 from app.models import Bookmark, Folder, db
 
+from app.models import Bookmark, Folder
+from flask import request
+
 @main_bp.route("/")
 def index():
     return render_template("main/index.html")
@@ -16,25 +19,43 @@ def feature():
 @main_bp.route("/bookmarks")
 @login_required
 def bookmarks():
+    user_folders = Folder.query.filter_by(user_id=current_user.id).all()
+
     user_bookmarks = Bookmark.query.filter_by(user_id=current_user.id).all()
-    return render_template("main/bookmarks.html", bookmarks=user_bookmarks)
+
+    unfiled_bookmarks = [bm for bm in user_bookmarks if bm.folder_id is None]
+
+    return render_template(
+        "main/bookmarks.html",
+        folders=user_folders,
+        unfiled_bookmarks=unfiled_bookmarks
+    )
+
 
 @main_bp.route("/bookmarks/add", methods=["GET", "POST"])
 @login_required
 def add_bookmark():
     form = BookmarkForm()
+    folders = Folder.query.filter_by(user_id=current_user.id).all()
+
     if form.validate_on_submit():
+        selected_folder = request.form.get("folder_id")
+        folder_id = int(selected_folder) if selected_folder else None
+
         new_bm = Bookmark(
             title=form.title.data,
             url=form.url.data,
-            user_id=current_user.id
+            user_id=current_user.id,
+            folder_id=folder_id
         )
         db.session.add(new_bm)
         db.session.commit()
         flash("Bookmark added!", "success")
         return redirect(url_for("main.bookmarks"))
 
-    return render_template("main/add_bookmark.html", form=form)
+    return render_template("main/add_bookmark.html", form=form, folders=folders)
+
+
 
 @main_bp.route("/bookmarks/edit/<int:bookmark_id>", methods=["GET", "POST"])
 @login_required
