@@ -59,4 +59,17 @@ def edit_bookmark(bookmark_id):
 
     return render_template("main/edit_bookmark.html", form=form)
 
+@main_bp.route("/bookmarks/delete/<int:bookmark_id>", methods=["POST"])
+@login_required
+def delete_bookmark(bookmark_id):
+    bookmark = Bookmark.query.get_or_404(bookmark_id)
+
+    if bookmark.user_id != current_user.id:
+        flash("You cannot delete another user's bookmark.", "danger")
+        return redirect(url_for("main.bookmarks"))
+
+    db.session.delete(bookmark)
+    db.session.commit()
+    flash("Bookmark deleted successfully!", "success")
+    return redirect(url_for("main.bookmarks"))
 
