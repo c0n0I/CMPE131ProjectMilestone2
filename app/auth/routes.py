@@ -1,11 +1,21 @@
-from flask import render_template, flash, redirect, url_for
-from . import auth_bp
+from flask import render_template, redirect, url_for, flash
+from flask_login import login_user
 from app.forms import LoginForm
+from app.models import User
+from . import auth_bp
 
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        flash("Login not implemented", "Notice")
-        return redirect(url_for("main.index"))
+        username = form.username.data.strip()
+
+        user = User.query.filter_by(username=username).first()
+
+        if user:
+            login_user(user)
+            return redirect(url_for("main.index"))
+        else:
+            flash("Username not found.", "error")
+
     return render_template("auth/login.html", form=form)
