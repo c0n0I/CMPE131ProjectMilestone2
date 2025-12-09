@@ -5,6 +5,7 @@ from flask_login import UserMixin
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=False)
+    role = db.Column(db.String(20), nullable=False, default="student")
 
 
 @login_manager.user_loader
@@ -27,6 +28,7 @@ class Folder(db.Model):
 
     bookmarks = db.relationship("Bookmark", backref="folder", lazy=True)
 
+
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
@@ -34,6 +36,7 @@ class Course(db.Model):
     instructor_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 
     assignments = db.relationship("Assignment", backref="course", lazy=True)
+
 
 class Assignment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
