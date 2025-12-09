@@ -5,10 +5,18 @@
     <p>{{ course.description }}</p>
 
     <h2>Assignments></h2>
-    {% if course.instructor_id == current_user.id %}
+    {% if current_user.role == "instructor" and course.instructor_id == current_user.id %}
         <a href="{{ url_for('main.new_assignment', course_id=course.id) }}">
             Add Assignment
         </a>
+
+        <form method="POST"
+            action="{{ url_for('main.delete_course', course_id=course.id) }}"
+                style="display:inline;">
+            <button type="submit" onclick="return confirm('Delete course?');">
+                Delete Course
+            </button>
+        </form>
     {% endif %}
     <ul>
         {% for assignment in assignments %}
