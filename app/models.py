@@ -38,7 +38,7 @@ class Course(db.Model):
     assignments = db.relationship(
         "Assignment", 
         backref="course", 
-        lazy=True
+        lazy=True,
         cascade="al'', delete-orphan"
     )
 
