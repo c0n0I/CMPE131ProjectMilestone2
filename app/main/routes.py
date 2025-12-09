@@ -141,6 +141,10 @@ def courses():
 @main_bp.route("/courses/new", methods=["GET", "POST"])
 @login_required
 def new_course():
+    if current_user.role != "instructor":
+        flash("Only instructors can create courses.", "danger")
+        return redirect(url_for("main.courses"))
+
     form = CourseForm()
     if form.validate_on_submit():
         course = Course(
@@ -170,13 +174,13 @@ def course_detail(course_id):
 def new_assignment(course_id):
     course = Course.query.get_or_404(course_id)
 
-    if course.instructor_id != current_user.id:
+    if current_user.role != "instructor" or course.instructor_id != current_user.id:
         flash("Only the course instructor can modify assignments.", "danger")
         return redirect(url_for("main.course_detail", course_id=course.id))
 
     form = AssignmentForm()
     if form.validate_on_submit():
-        assignment = Assignmemt(
+        assignment = Assignment(
             course_id=course.id,
             title=form.title.data,
             description=form.description.data
