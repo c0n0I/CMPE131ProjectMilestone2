@@ -190,3 +190,17 @@ def new_assignment(course_id):
         flash("Assignment created!", "success")
         return redirect(url_for("main.course_detail", course_id=course.id))
     return render_template("main/new_assignment.html", form=form, course=course)
+
+@main_bp.route("/courses/<int:course_id>/delete", methods=["POST"])
+@login_required
+def delete_course(course_id):
+    course = Course.query.get_or_404(course_id)
+
+    if current_user.role != "instructor" or course.instructor_id != current_user.id:
+        flash("Only the course instructor can delete this course.", "danger")
+        return redirect(url_for("main.course_detail", course_id=course.id))
+
+    db.session.delete(course)
+    db.session.commit()
+    flash("Course deleted.", "success")
+    return redirect(url_for("main.courses"))
