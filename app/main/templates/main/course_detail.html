@@ -1,38 +1,61 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>{{ course.title  }}</h1>
+
+<!-- Course Info -->
+<div class="card">
+    <h1>{{ course.title }}</h1>
     <p>{{ course.description }}</p>
+</div>
 
-    <h2>Assignments></h2>
-    {% if current_user.role == "instructor" and course.instructor_id == current_user.id %}
-        <a href="{{ url_for('main.new_assignment', course_id=course.id) }}">
-            Add Assignment
-        </a>
+<!-- Assignments Section -->
+<div class="card">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2>Assignments</h2>
 
-        <form method="POST"
-            action="{{ url_for('main.delete_course', course_id=course.id) }}"
-            style="display:inline;">
-            <button type="submit" onclick="return confirm('Delete course?');">
-                Delete Course
-            </button>
-        </form>
+        {% if current_user.role == "instructor" and course.instructor_id == current_user.id %}
+            <div>
+                <a class="btn btn-primary"
+                   href="{{ url_for('main.new_assignment', course_id=course.id) }}">
+                    + Add Assignment
+                </a>
+
+                <form method="POST"
+                      action="{{ url_for('main.delete_course', course_id=course.id) }}"
+                      style="display:inline;">
+                    <button class="btn btn-danger"
+                            onclick="return confirm('Delete course?')">
+                        Delete Course
+                    </button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    {% if assignments %}
+        <ul>
+            {% for assignment in assignments %}
+                <li>
+                    <strong>{{ assignment.title }}</strong><br>
+                    <p>{{ assignment.description }}</p>
+
+                    {% if current_user.role == "instructor" and course.instructor_id == current_user.id %}
+                        <form method="POST"
+                              action="{{ url_for('main.delete_assignment', assignment_id=assignment.id) }}"
+                              style="display:inline;">
+                            <button class="btn btn-secondary">
+                                Delete Assignment
+                            </button>
+                        </form>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p><em>No assignments have been posted yet.</em></p>
     {% endif %}
-    <ul>
-        {% for assignment in assignments %}
-            <li>{{ assignment.title }}
-                {% if current_user.role == "instructor" and course.instructor_id == current_user.id %}
-                    <form method="POST"
-                        action="{{ url_for('main.delete_assignment', assignment_id=assignment.id) }}"
-                        style="display:inline;">
-                        <button type="submit" onclick="return confirm('Delete this assignment?');">
-                            Delete Assignment
-                        </button>
-                    </form>
-                {% endif %}
-            </li>
-        {% else %}
-            <li>No assignments yet.</li>
-        {% endfor %}
-    </ul>
+</div>
+
 {% endblock %}
