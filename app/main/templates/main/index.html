@@ -1,6 +1,38 @@
 {% extends "base.html" %}
+
 {% block content %}
-<h1>Welcome to the Learning+! </h1>
-<h2>This is our Bookmarking Prototype. </h2>
-<p>This is the index page.</p>
+<div class="card">
+    <h1>Welcome to Learning+</h1>
+    <p>
+        Learning+ is a personalized bookmarking system designed to help students
+        organize course materials such as slides, PDFs, links, and assignments
+        in one convenient place.
+    </p>
+</div>
+
+<div class="card">
+    <h2>What You Can Do</h2>
+    <ul>
+        <li>📌 Save and manage important course resources</li>
+        <li>📂 Organize bookmarks into custom folders</li>
+        <li>🎓 Access instructor-managed courses and assignments</li>
+        <li>⚡ Quickly return to materials when studying or completing assignments</li>
+    </ul>
+</div>
+
+<div class="card">
+    {% if current_user.is_authenticated %}
+        <p>
+            Welcome back, <strong>{{ current_user.username }}</strong>!
+        </p>
+        <a class="btn btn-primary" href="{{ url_for('main.bookmarks') }}">
+            Go to My Bookmarks
+        </a>
+    {% else %}
+        <p>Please log in to start organizing your learning resources.</p>
+        <a class="btn btn-primary" href="{{ url_for('auth.login') }}">
+            Login
+        </a>
+    {% endif %}
+</div>
 {% endblock %}
