@@ -1,64 +1,85 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Your Bookmarks</h1>
 
-<a href="{{ url_for('main.add_bookmark') }}" style="display:inline-block; margin-bottom:15px;">
-    + Add Bookmark
-</a>
+<!-- Page Header -->
+<div class="card">
+    <h1>Your Bookmarks</h1>
+    <a class="btn btn-primary" href="{{ url_for('main.add_bookmark') }}">
+        + Add Bookmark
+    </a>
+</div>
 
-<hr>
-
+<!-- Foldered Bookmarks -->
 {% for folder in folders %}
+<div class="card">
     <h2>{{ folder.name }}</h2>
 
     {% if folder.bookmarks %}
         <ul>
-        {% for bm in folder.bookmarks %}
+            {% for bm in folder.bookmarks %}
             <li>
                 <strong>{{ bm.title }}</strong>
-                — <a href="{{ bm.url }}" target="_blank">Open</a>
-                — <a href="{{ url_for('main.edit_bookmark', bookmark_id=bm.id) }}">Edit</a>
+                <br>
+
+                <a class="btn btn-secondary" href="{{ bm.url }}" target="_blank">
+                    Open
+                </a>
+
+                <a class="btn btn-secondary"
+                   href="{{ url_for('main.edit_bookmark', bookmark_id=bm.id) }}">
+                    Edit
+                </a>
 
                 <form action="{{ url_for('main.delete_bookmark', bookmark_id=bm.id) }}"
                       method="POST"
                       style="display:inline;">
-                    <button type="submit" style="color:red; border:none; background:none; cursor:pointer;">
+                    <button class="btn btn-danger" type="submit">
                         Delete
                     </button>
                 </form>
             </li>
-        {% endfor %}
+            {% endfor %}
         </ul>
     {% else %}
-        <p><i>No bookmarks in this folder.</i></p>
+        <p><em>No bookmarks in this folder.</em></p>
     {% endif %}
-
-    <hr>
+</div>
 {% endfor %}
 
-<h2>Unorganized Bookmarks</h2>
+<!-- Unorganized Bookmarks -->
+<div class="card">
+    <h2>Unorganized Bookmarks</h2>
 
-{% if unfiled_bookmarks %}
-<ul>
-    {% for bm in unfiled_bookmarks %}
-        <li>
-            <strong>{{ bm.title }}</strong>
-            — <a href="{{ bm.url }}" target="_blank">Open</a>
-            — <a href="{{ url_for('main.edit_bookmark', bookmark_id=bm.id) }}">Edit</a>
+    {% if unfiled_bookmarks %}
+        <ul>
+            {% for bm in unfiled_bookmarks %}
+            <li>
+                <strong>{{ bm.title }}</strong>
+                <br>
 
-            <form action="{{ url_for('main.delete_bookmark', bookmark_id=bm.id) }}"
-                  method="POST"
-                  style="display:inline;">
-                <button type="submit" style="color:red; border:none; background:none; cursor:pointer;">
-                    Delete
-                </button>
-            </form>
-        </li>
-    {% endfor %}
-</ul>
-{% else %}
-    <p><i>No unorganized bookmarks.</i></p>
-{% endif %}
+                <a class="btn btn-secondary" href="{{ bm.url }}" target="_blank">
+                    Open
+                </a>
+
+                <a class="btn btn-secondary"
+                   href="{{ url_for('main.edit_bookmark', bookmark_id=bm.id) }}">
+                    Edit
+                </a>
+
+                <form action="{{ url_for('main.delete_bookmark', bookmark_id=bm.id) }}"
+                      method="POST"
+                      style="display:inline;">
+                    <button class="btn btn-danger" type="submit">
+                        Delete
+                    </button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p><em>No unorganized bookmarks.</em></p>
+    {% endif %}
+</div>
 
 {% endblock %}
