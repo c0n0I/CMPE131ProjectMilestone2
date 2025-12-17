@@ -26,18 +26,44 @@ Run the App:
 
 Screenshots:
 Home Page
-<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/2d837d0f-b5e1-4e02-af53-21b2e7ceb84f" />
+<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/2561fad3-18e5-4113-9325-ecb7ac15adf3" />
+
 Login Page
-<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/80512631-a6be-4234-89ad-9862bf1f2394" />
-Logged In Home Page
-<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/1a89d5f3-4ef8-4947-91f4-b199fb953667" />
+<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/519508f0-b4ee-4628-a45e-615bf648be56" />
+
+Logged In Home Page (Student)
+<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/d0ccc07a-62e1-4c7b-900b-4085c8ee1623" />
+
 Bookmarks Page
-<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/5e83d912-7dc5-4fe8-887d-072c0dcba922" />
+<img width="2558" height="1437" alt="image" src="https://github.com/user-attachments/assets/9e6cd9f5-dfe1-4e5a-aa18-0bad48038689" />
+
 Add Bookmarks Page
-<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/8ed48f83-689e-4a27-bbb3-969a03e83fca" />
+<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/23ca7246-2269-4bc9-8c26-622004f490e8" />
+
 Folders Page
-<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/d71ef9a9-dd48-4ad9-beb5-cb37097f003d" />
+<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/d252b5b3-4247-45fd-80f4-aa54d43a19a6" />
+
 Add Folder Page
-<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/33c8204a-4e0b-4c45-8be9-05edcbd6cf3c" />
+<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/30599f97-f39b-4fb7-807d-1071e57ff5a0" />
+
+Courses Page (Student)
+<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/c7e09642-5c5b-4cf6-a3e1-ec788022f0a4" />
+
+Course Page (Instructor)
+<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/9128e881-509a-4a24-ab5a-1d3c3d9dc0c7" />
+
+Add Course Page (Instructor)
+<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/1ba22d55-3a1a-4643-8a73-e7e8f48e0e41" />
+<img width="2548" height="1436" alt="image" src="https://github.com/user-attachments/assets/a2a4daab-810b-45e9-811b-0f551ce8f637" />
+
+Assignment Creation Page (Instructor)
+<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/30862879-a322-4cb5-802e-7250f4cb55d1" />
+
+
+
+
+
+
+
 
 
